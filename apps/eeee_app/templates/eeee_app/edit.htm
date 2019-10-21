@@ -1,0 +1,38 @@
+htm<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'eeee_app/css/style.css' %}">
+
+</head>
+<body>
+    <h1>Welcome {{request.session.first_name}}! Let's create a trip!</h1>
+    <a href="logout">Logout</a>
+    <a href="dashboard/{{request.session.id}}">Dashboard</a>
+    {% if messages %}
+    <ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="trip">
+        <form action="/edit_trip" method="post">
+            {% csrf_token %}
+            <p>Destination: </p>
+            <input type="text" name="add_destination" value="{{">
+            <p>Departure: </p>
+            <input type="date" name="add_departure" value="Departure">
+            <p>Arrival: </p>
+            <input type="date" name="add_arrival" value="Arrival">
+            <p>Plan: </p>
+            <input type="text" name="add_plan" value="">
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>

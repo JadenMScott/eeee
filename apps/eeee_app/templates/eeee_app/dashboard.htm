@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'eeee_app/css/style.css' %}">
+</head>
+<body>
+    <h1>Welcome {{request.session.first_name}}</h1>
+    <a href="/add_trip">Add a trip?</a>
+    <a href="/logout">Logout?</a>
+    <h1>Your trips</h1>
+    <div class="table">
+        <table>
+            <tr>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Plan</th>
+            <th>Actions</th>
+        </tr>
+        {% for t in logged_user %}
+        <tr>
+            <td><a href="/trip/{{t.id}}">{{t.destination}}</a></td>
+            <td>{{t.d_date}}</td>
+            <td>{{t.arrival}}</td>
+            <td>{{t.plan}}</td>
+            {% if request.session.first_name != t.creator %}
+            <td><a href="/remove/{{t.id}}">Remove</a></td>
+            <td><a href="/edit/{{t.id}}">Edit</a></td>
+            {% else %}
+            <td><a href="/cancel/{{t.id}}">Cancel</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h1>Other People's trips</h1>
+    <div class="table">
+        <table>
+            <tr>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Plan</th>
+                <th>Actions</th>
+            </tr>
+            {% for t in not_logged_user %}
+            <tr>
+                <td>{{t.destination}}</td>
+                <td>{{t.departure}}</td>
+                <td>{{t.arrival}}</td>
+                <td>{{t.plan}}</td>
+                <td><a href="/join/{{t.id}}">Join!</a>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>

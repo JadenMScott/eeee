@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'eeee_app/css/style.css' %}">
+</head>
+</head>
+<body>
+    <h1>Welcome {{request.session.first_name}}</h1>
+    <a href="/dashboard/{{trip.creator.id}}">Go back to dashboard</a>
+    <p>Destination: {{trip.destination}}</p>
+    <div class="details">
+        <p>Departure: {{trip.departure}}</p>
+        <p>Arrival: {{trip.arrival}}</p>
+        <p>Created at: {{trip.created_at}}</p>
+        <p>Updated at: {{trip.updated_at}}</p>
+        <p>Trip Plan:{{trip.plan}}</p>
+        <p>Trip Creator:{{trip.creator.first_name}}</p>
+
+        <p>People also going on this trip:</p>
+        <ul>
+            {% for t in traveler %}
+            <li>trip.t.first_name</li>
+            {% endfor%}
+        </ul>
+    </div>
+</body>
+</html>

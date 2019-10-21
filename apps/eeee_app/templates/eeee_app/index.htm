@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'eeee_app/css/style.css' %}">
+</head>
+<body>
+    <h1>Welcome! Please login or register!</h1>
+    {% if messages %}
+    <ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+    </ul>
+{% endif %}
+    <div class="login">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <p>Email:</p>
+            <input type='text' name='log_email'>
+            <p>Password:</p>
+            <input type='text' name='log_pass'>
+            <button value="true">Login!</button>
+        </form>
+    </div>
+    <div class ="register">
+        <h1>Register</h1>
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <p>First Name:</p>
+            <input type='text' name='reg_first_name'>
+            <p>Last name:</p>
+            <input type='text' name='reg_last_name'>
+            <p>Email address:</p>
+            <input type='text' name='reg_email'>
+            <p>Password:</p>
+            <input type='text' name='reg_pass'>
+            <p>Confirm password:</p>
+            <input type='text' name='reg_conf_pass'>
+            <button type="submit" value="true">Register!</button>
+        </form>
+    </div>
+</body>
+</html>
